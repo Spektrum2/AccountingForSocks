@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  postgres:
+    image: 'postgres:15'
+    container_name: 'java-postgres'
+    ports:
+      - 5430:5432
+    environment:
+      - 'POSTGRES_DB=db'
+      - 'POSTGRES_USER=myUser'
+      - 'POSTGRES_PASSWORD=12Qwerty'
+      - 'POSTGRES_HOST_AUTH_METHOD=trust'
+  postgres_test:
+    image: 'postgres:15'
+    container_name: 'java-postgres-test'
+    ports:
+      - 5431:5432
+    environment:
+      - 'POSTGRES_DB=db'
+      - 'POSTGRES_USER=myUser'
+      - 'POSTGRES_PASSWORD=12Qwerty'
+      - 'POSTGRES_HOST_AUTH_METHOD=trust'

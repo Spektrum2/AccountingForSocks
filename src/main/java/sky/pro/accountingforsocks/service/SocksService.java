@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import sky.pro.accountingforsocks.component.DtoMapper;
-import sky.pro.accountingforsocks.dto.RegistrationRecord;
 import sky.pro.accountingforsocks.dto.SocksRecord;
 import sky.pro.accountingforsocks.exception.*;
 import sky.pro.accountingforsocks.model.Registration;
@@ -14,8 +13,6 @@ import sky.pro.accountingforsocks.repository.RegistrationRepository;
 import sky.pro.accountingforsocks.repository.SocksRepository;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class SocksService {
@@ -141,29 +138,5 @@ public class SocksService {
         registration.setDate(LocalDateTime.now());
         registration.setQuantity(socksRecord.getQuantity());
         return registration;
-    }
-
-    /**
-     * Метод для получения всех пар носков
-     *
-     * @return Возвращает список всех пар носков
-     */
-    public List<SocksRecord> getAllSocks() {
-        logger.info("Was invoked method for get all socks");
-        return socksRepository.findAll().stream()
-                .map(dtoMapper::toSocksDto)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Метод для получения всех регистраций прихода/отпуска носков со склада
-     *
-     * @return Возвращает список всех регистраций прихода/отпуска носков со склада
-     */
-    public List<RegistrationRecord> getAllRegistration() {
-        logger.info("Was invoked method for get all registration");
-        return registrationRepository.findAll().stream()
-                .map(dtoMapper::toRegistrationDto)
-                .collect(Collectors.toList());
     }
 }
